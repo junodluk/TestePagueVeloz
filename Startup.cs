@@ -7,14 +7,24 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using PagueVeloz.Persistence;
+using AutoMapper;
 
 namespace PagueVeloz
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", optional: false)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+                // .AddJsonFile();
         }
 
         public IConfiguration Configuration { get; }
@@ -22,6 +32,8 @@ namespace PagueVeloz
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionString:Default"]));
             services.AddMvc();
         }
 
