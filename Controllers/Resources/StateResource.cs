@@ -3,7 +3,7 @@ namespace PagueVeloz.Controllers.Resources
     public class StateResource
     {
         // public int Id { get; set; }
-        public string Initials { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 

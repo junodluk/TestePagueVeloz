@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PagueVeloz.Models
+namespace PagueVeloz.Controllers.Resources
 {
-    [Table("Peoples")]
-    public class People
+    public class SavePeopleResource
     {
         public int Id { get; set; }
 
@@ -22,20 +20,17 @@ namespace PagueVeloz.Models
         [StringLength(255)]
         public string Rg { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
-
-        public DateTime LastUpdate { get; set; }
-
+        [Required]
         public DateTime BirthDate { get; set; }
 
-        public State State { get; set; }
-
+        [Required]
         public string StateId { get; set; }
 
-        public ICollection<PeoplePhone> Phones { get; set; }
+        public ICollection<PeoplePhoneResource> Phones { get; set; }
 
-        public People() {
-            Phones = new Collection<PeoplePhone>();
+        public SavePeopleResource()
+        {
+            Phones = new Collection<PeoplePhoneResource>();
         }
     }
 }

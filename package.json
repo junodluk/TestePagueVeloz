@@ -59,5 +59,12 @@
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.2.16",
+    "angular2-text-mask": "^8.0.4",
+    "moment": "^2.19.2",
+    "ng2-daterangepicker": "^2.0.12",
+    "ng2-toasty": "^2.5.0"
   }
 }

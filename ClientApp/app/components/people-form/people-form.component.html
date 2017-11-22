@@ -1,0 +1,44 @@
+<h3>Pessoa</h3>
+<hr />
+<!-- <p>{{ people | json }}</p>
+<hr /> -->
+<form #f="ngForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input id="name" name="name" type="text" class="form-control" [(ngModel)]="people.name" required #name="ngModel">
+    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">Por favor informe um Nome.</div>
+  </div>
+  <div class="form-group">
+    <label for="state">Estado</label>
+    <select id="state" name="state" class="form-control" [(ngModel)]="people.stateId" (change)="onStateChange()" required #state="ngModel">
+      <option [ngValue]="-1" disabled="true" [selected]="!people.stateId || people.stateId.length == 0">Selecione um Estado...</option>
+      <option *ngFor="let st of states" [ngValue]="st.id">{{st.name}}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="state.touched && !state.valid">Por favor informe um Estado.</div>
+  </div>
+  <div class="form-group">
+    <label for="cpf">CPF</label>
+    <input id="cpf" name="cpf" type="text" class="form-control" [textMask]="{mask: cpfMask, guide: false}" [(ngModel)]="people.cpf" required #cpf="ngModel">
+    <div class="alert alert-danger" *ngIf="cpf.touched && (!cpf.valid || !cpfIsValid())">Por favor informe um CPF.</div>
+  </div>
+  <div *ngIf="(people.state && people.state.requireRG)" class="form-group">
+    <label for="rg">RG</label>
+    <input id="rg" name="rg" type="text" class="form-control" [(ngModel)]="people.rg" required #rg="ngModel">
+    <div class="alert alert-danger" *ngIf="rg.touched && !rg.valid">Por favor informe um RG.</div>
+  </div>
+  <div class="form-group">
+    <label for="birthDate">Data de Nascimento</label>
+    <div id="birthDate" class="input-group" daterangepicker [options]="options" (selected)="selectedDate($event)">
+        <span class="form-control uneditable-input"  name="daterange" >
+            {{ people.birthDate | date:'dd/M/y' }}
+        </span>
+        <span class="input-group-btn">
+            <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
+        </span>
+    </div>
+  </div>
+
+  <button class="btn btn-sm btn-success" [disabled]="!f.valid || !people.birthDate || !cpfIsValid()">Salvar</button>
+  <button *ngIf="people.id" type="button" class="btn btn-sm btn-danger" (click)="delete()">Remover</button>
+  
+</form>

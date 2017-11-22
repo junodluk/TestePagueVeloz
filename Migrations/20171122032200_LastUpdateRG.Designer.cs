@@ -11,9 +11,10 @@ using System;
 namespace PagueVeloz.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171122032200_LastUpdateRG")]
+    partial class LastUpdateRG
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +41,7 @@ namespace PagueVeloz.Migrations
                     b.Property<DateTime>("RegistrationDate");
 
                     b.Property<string>("Rg")
+                        .IsRequired()
                         .HasMaxLength(255);
 
                     b.Property<string>("StateId");

@@ -11,7 +11,7 @@ using System;
 namespace PagueVeloz.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20171121161532_InitialModel")]
+    [Migration("20171121204841_InitialModel")]
     partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,11 +38,11 @@ namespace PagueVeloz.Migrations
 
                     b.Property<DateTime>("RegistrationDate");
 
-                    b.Property<string>("StateInitials");
+                    b.Property<string>("StateId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StateInitials");
+                    b.HasIndex("StateId");
 
                     b.ToTable("Peoples");
                 });
@@ -67,7 +67,7 @@ namespace PagueVeloz.Migrations
 
             modelBuilder.Entity("PagueVeloz.Models.State", b =>
                 {
-                    b.Property<string>("Initials")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(10);
 
@@ -79,7 +79,7 @@ namespace PagueVeloz.Migrations
 
                     b.Property<bool>("RequireRG");
 
-                    b.HasKey("Initials");
+                    b.HasKey("Id");
 
                     b.ToTable("States");
                 });
@@ -88,7 +88,7 @@ namespace PagueVeloz.Migrations
                 {
                     b.HasOne("PagueVeloz.Models.State", "State")
                         .WithMany()
-                        .HasForeignKey("StateInitials");
+                        .HasForeignKey("StateId");
                 });
 
             modelBuilder.Entity("PagueVeloz.Models.PeoplePhone", b =>

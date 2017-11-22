@@ -1,0 +1,29 @@
+<h3>Lista de Pessos</h3>
+<hr />
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Nascimento</th>
+      <th>Estado</th>
+      <th>Registro</th>
+      <th>Modificado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let people of peoples">
+      <th scope="row">{{ people.id }}</th>
+      <th>{{ people.name }}</th>
+      <th>{{ people.cpf }}</th>
+      <th>{{ people.birthDate | date: 'dd/MM/yyyy' }}</th>
+      <th>{{ people.state.id }}</th>
+      <th>{{ people.registrationDate | date: 'dd/MM/yyyy'  }}</th>
+      <th>{{ people.lastUpdate | date: 'dd/MM/yyyy'  }}</th>
+      <th> <a href=""></a> </th>
+    </tr>
+  </tbody>
+</table>
+

@@ -743,6 +743,11 @@
       "integrity": "sha512-2YNL0jXYuN7w07mb1sMZQ6T6zOvGi83v8UbjhBZ8mhvI1VkQ2STU9XOrTFyvWswMyh5rW1evS+e7qltYJvTqPA==",
       "dev": true
     },
+    "@types/jquery": {
+      "version": "3.2.16",
+      "resolved": "https://registry.npmjs.org/@types/jquery/-/jquery-3.2.16.tgz",
+      "integrity": "sha512-q2WC02YxQoX2nY1HRKlYGHpGP1saPmD7GN0pwCDlTz35a4eOtJG+aHRlXyjCuXokUukSrR2aXyBhSW3j+jPc0A=="
+    },
     "@types/webpack-env": {
       "version": "1.13.0",
       "resolved": "https://registry.npmjs.org/@types/webpack-env/-/webpack-env-1.13.0.tgz",
@@ -862,6 +867,14 @@
       "dev": true,
       "requires": {
         "loader-utils": "0.2.17"
+      }
+    },
+    "angular2-text-mask": {
+      "version": "8.0.4",
+      "resolved": "https://registry.npmjs.org/angular2-text-mask/-/angular2-text-mask-8.0.4.tgz",
+      "integrity": "sha1-B+SFdGz7nyfnELJ7J4XqxMxIcfw=",
+      "requires": {
+        "text-mask-core": "5.0.1"
       }
     },
     "ansi-html": {
@@ -1578,6 +1591,15 @@
       "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz",
       "integrity": "sha1-WjiTlFSfIzMIdaOxUGVldPip63E=",
       "dev": true
+    },
+    "bootstrap-daterangepicker": {
+      "version": "2.1.25",
+      "resolved": "https://registry.npmjs.org/bootstrap-daterangepicker/-/bootstrap-daterangepicker-2.1.25.tgz",
+      "integrity": "sha1-/Ni6C3VaBU0zDXo7fE3Yu4Vc/7c=",
+      "requires": {
+        "jquery": "3.2.1",
+        "moment": "2.19.2"
+      }
     },
     "brace-expansion": {
       "version": "1.1.8",
@@ -5567,8 +5589,7 @@
     "jquery": {
       "version": "3.2.1",
       "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.1.tgz",
-      "integrity": "sha1-XE2d5lKvbNCncBVKYxu6ErAVx4c=",
-      "dev": true
+      "integrity": "sha1-XE2d5lKvbNCncBVKYxu6ErAVx4c="
     },
     "js-base64": {
       "version": "2.1.9",
@@ -6357,6 +6378,11 @@
         "minimist": "0.0.8"
       }
     },
+    "moment": {
+      "version": "2.19.2",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.19.2.tgz",
+      "integrity": "sha512-Rf6jiHPEfxp9+dlzxPTmRHbvoFXsh2L/U8hOupUMpnuecHQmI6cF6lUbJl3QqKPko1u6ujO+FxtcajLVfLpAtA=="
+    },
     "move-concurrently": {
       "version": "1.0.1",
       "resolved": "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz",
@@ -6434,6 +6460,19 @@
       "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz",
       "integrity": "sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=",
       "dev": true
+    },
+    "ng2-daterangepicker": {
+      "version": "2.0.12",
+      "resolved": "https://registry.npmjs.org/ng2-daterangepicker/-/ng2-daterangepicker-2.0.12.tgz",
+      "integrity": "sha512-Tcnd5CPGb5XkWLcD+5roagzKS4RL7QxpU7rT0GGtcduIC0jzj3tHRLO3VmkddbeivomSXkPnOlvBg2tjbYMI5A==",
+      "requires": {
+        "bootstrap-daterangepicker": "2.1.25"
+      }
+    },
+    "ng2-toasty": {
+      "version": "2.5.0",
+      "resolved": "https://registry.npmjs.org/ng2-toasty/-/ng2-toasty-2.5.0.tgz",
+      "integrity": "sha1-NmkbzJCJNZ1rwIc6pPJ3e0HCEAY="
     },
     "no-case": {
       "version": "2.3.1",
@@ -9807,6 +9846,11 @@
         "fstream": "1.0.11",
         "inherits": "2.0.3"
       }
+    },
+    "text-mask-core": {
+      "version": "5.0.1",
+      "resolved": "https://registry.npmjs.org/text-mask-core/-/text-mask-core-5.0.1.tgz",
+      "integrity": "sha1-htt0K9/jtMODu1GjtMo0LIYRBjk="
     },
     "through": {
       "version": "2.3.8",
