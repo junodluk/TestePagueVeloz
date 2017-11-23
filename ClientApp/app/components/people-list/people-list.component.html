@@ -73,6 +73,7 @@
     </tr>
   </tbody>
 </table>
+<div class="alert alert-info" *ngIf="queryResult.items.length == 0"><strong>Opa!</strong> Parece que não há nenhuma pessoa cadastrada. Adicione a primeira pessoa para começar!</div>
 <pagination [total-items]="queryResult.totalItems" [current-page]="query.page" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
 
 

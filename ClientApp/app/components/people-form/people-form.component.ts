@@ -29,8 +29,9 @@ export class PeopleFormComponent implements OnInit {
 
   public phoneIndex: number;
   public phoneEditForm: boolean;
+  public birthDateTouched: boolean = false;
   public phoneDummy: PeoplePhone = {} as PeoplePhone;
-  public states: State;
+  public states: State[] = [];
   public people = {} as People;
 
   constructor(
@@ -58,7 +59,7 @@ export class PeopleFormComponent implements OnInit {
       sources.push(this.peopleService.getPeople(this.people.id));
 
     Observable.forkJoin(sources).subscribe(data => {
-      this.states = data[0] as State;
+      this.states = data[0] as State[];
       if (this.people.id) {
         this.people = data[1] as People;
         this.datePickerOptions.startDate = new Date((data[1] as People).birthDate);
@@ -71,8 +72,27 @@ export class PeopleFormComponent implements OnInit {
     });
   }
   
-  public selectedDate(value: any) {
+  public selectBirthDate(value: any) {
     this.people.birthDate = value.start;
+  }
+
+  public setBirthDateTouched(value: any) {
+    this.birthDateTouched = true;
+  }
+
+  birthDateIsValid() {
+    var age = this.calculateAge(this.people.birthDate);
+
+    if (!this.people.birthDate)
+      return false;
+
+    if (age < 0)
+      return false;
+    
+    if (this.people.state && this.people.state.minimumAge > 0 && age < this.people.state.minimumAge)
+      return false;
+    
+    return true;
   }
 
   cpfIsValid() {
@@ -96,7 +116,11 @@ export class PeopleFormComponent implements OnInit {
     }
 
   onStateChange() {
-    // this.people.stateId = this.people.state.id;
+    if (!this.people.stateId)
+      return;
+    var stateFind = (this.states as State[]).find(s => s.id === this.people.stateId);
+    if (stateFind)
+      this.people.state = stateFind;
   }
 
   showPhoneEditForm() {
@@ -125,13 +149,15 @@ export class PeopleFormComponent implements OnInit {
     if (!this.phoneIsValid()) 
       return;
 
+    if (!this.people.phones)
+      this.people.phones = [];
+
     if (this.phoneIndex >= 0)
       this.people.phones[this.phoneIndex] = this.phoneDummy;
     else 
       this.people.phones.push(this.phoneDummy);
 
     this.resetPhone();
-    console.log(this.people.phones);
   }
 
   deletePhone(index: number) {
@@ -184,6 +210,31 @@ export class PeopleFormComponent implements OnInit {
     }
 
   }
+
+  calculateAge(birth: Date) { 
+    if (!birth) 
+      return -1;
+
+    var birthDate = new Date(birth);
+
+    var today = new Date();
+    var nowyear = today.getFullYear();
+    var nowmonth = today.getMonth();
+    var nowday = today.getDate();
+
+    var birthyear = birthDate.getFullYear();
+    var birthmonth = birthDate.getMonth();
+    var birthday = birthDate.getDate();
+
+    var age = nowyear - birthyear;
+    var age_month = nowmonth - birthmonth;
+    var age_day = nowday - birthday;
+
+    if(age_month < 0 || (age_month == 0 && age_day <0))
+        age = age -1;
+
+    return age
+}
 
   navigateBackToList() {
     this.router.navigate(['/peoples']);

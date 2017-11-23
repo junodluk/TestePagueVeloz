@@ -1,7 +1,5 @@
 <h3><i class="fa fa-arrow-left clickable" (click)="navigateBackToList()"></i> Pessoa</h3>
 <hr />
-<!-- <p>{{ people | json }}</p>
-<hr /> -->
 <form #f="ngForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="name">Nome</label>
@@ -19,7 +17,7 @@
   <div class="form-group">
     <label for="cpf">CPF</label>
     <input id="cpf" name="cpf" type="text" class="form-control" [textMask]="{mask: cpfMask, guide: false}" [(ngModel)]="people.cpf" required #cpf="ngModel">
-    <div class="alert alert-danger" *ngIf="cpf.touched && (!cpf.valid || !cpfIsValid())">Por favor informe um CPF.</div>
+    <div class="alert alert-danger" *ngIf="cpf.touched && (!cpf.valid || !cpfIsValid())">Por favor informe um CPF válido.</div>
   </div>
   <div *ngIf="(people.state && people.state.requireRG)" class="form-group">
     <label for="rg">RG</label>
@@ -28,7 +26,7 @@
   </div>
   <div class="form-group">
     <label for="birthDate">Data de Nascimento</label>
-    <div id="birthDate" class="input-group" daterangepicker [options]="datePickerOptions" (selected)="selectedDate($event)">
+    <div id="birthDate" class="input-group" daterangepicker [options]="datePickerOptions" (selected)="selectBirthDate($event)" (hideDaterangepicker)="setBirthDateTouched($event)">
         <span class="form-control uneditable-input"  name="daterange" >
             {{ people.birthDate | date:'dd/M/y' }}
         </span>
@@ -36,6 +34,7 @@
             <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
         </span>
     </div>
+    <div class="alert alert-danger" *ngIf="birthDateTouched && !birthDateIsValid()">Por Favor informe uma data de Nascimento válida</div>
   </div>
 
 </form>
@@ -59,16 +58,17 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="people.phones">
     <tr *ngFor="let phone of people.phones; let i = index" [attr.data-index]="i" (click)="editPhone(i, phone)">
       <th>{{phone.phone}}</th>
       <th class="align-right"><button type="button" class="btn btn-sm btn-danger" (click)="deletePhone(i)"><i class="fa fa-close"></i></button></th>
     </tr>
   </tbody>
 </table>
+<div class="alert alert-info" *ngIf="!people.phones || people.phones.length == 0"><strong>Hey!</strong> Essa pessoa ainda não possui telefones. Que tal adicionar algum?</div>
 
 <hr />
 
-<button type="button" class="btn btn-success" [disabled]="!f.valid || !people.birthDate || !cpfIsValid()" (click)="submit()"><i class="fa fa-check"></i> Salvar</button>
+<button type="button" class="btn btn-success" [disabled]="!f.valid || !birthDateIsValid() || !cpfIsValid()" (click)="submit()"><i class="fa fa-check"></i> Salvar</button>
 <button *ngIf="people.id" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-close"></i> Remover</button>
   
