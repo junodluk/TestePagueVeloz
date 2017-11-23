@@ -1,4 +1,4 @@
-# TestePagueVeloz
+# Teste PagueVeloz
 
 Projeto criado como um teste para vaga na PagueVeloz.
 
