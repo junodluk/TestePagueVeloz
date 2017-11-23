@@ -1,6 +1,6 @@
-# Teste PagueVeloz
+﻿# Teste PagueVeloz
 
-Projeto criado como um teste para vaga na PagueVeloz.
+Projeto criado como um teste para vaga na PagueVeloz/BluData.
 
 Criado por **Alcione de Lucca Júnior** <junior.dluk@gmail.com>
 
