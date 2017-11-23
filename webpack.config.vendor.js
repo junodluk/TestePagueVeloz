@@ -12,13 +12,14 @@ const treeShakableModules = [
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
+    'angular2-text-mask',
+    'font-awesome/css/font-awesome.css',
     'jquery',
     'moment',
     'ng2-daterangepicker',
     'ng2-daterangepicker/daterangepicker.component.css',
     'ng2-toasty',
     'ng2-toasty/bundles/style-bootstrap.css',
-    'angular2-text-mask',
     'zone.js',
 ];
 const nonTreeShakableModules = [

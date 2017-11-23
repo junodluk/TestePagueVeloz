@@ -8,8 +8,8 @@ export interface People {
     state: State;
     stateId: string;
     birthDate: Date;
+    phones: PeoplePhone[];
     rg?: string;
     registrationDate?: Date;
     lastUpdate?: Date;
-    phones?: PeoplePhone[];
 }

@@ -1,0 +1,14 @@
+table.table > tbody > tr > th {
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.fa.clickable:hover {
+    cursor: pointer;
+    /* text-decoration: underline; */
+}

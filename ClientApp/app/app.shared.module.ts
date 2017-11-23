@@ -1,5 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -11,22 +11,18 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { PeopleFormComponent } from './components/people-form/people-form.component';
 import { PeopleService } from './services/people.service';
 import { PeopleListComponent } from './components/people-list/people-list.component';
+import { PaginationComponent } from './components/shared/pagination.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent,
         PeopleFormComponent,
-        PeopleListComponent
+        PeopleListComponent,
+        PaginationComponent
     ],
     imports: [
         CommonModule,
@@ -40,14 +36,12 @@ import { PeopleListComponent } from './components/people-list/people-list.compon
             { path: 'peoples/new', component: PeopleFormComponent },
             { path: 'peoples/:id', component: PeopleFormComponent },
             { path: 'peoples', component: PeopleListComponent },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: 'peoples' }
         ])
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
+        DatePipe,
         PeopleService
     ]
 })

@@ -7,6 +7,7 @@ export class AppErrorHandler implements ErrorHandler {
 
     handleError(err: any) {
         this.ngZone.run(() => {
+            console.log(err);
             this.toastyService.error({
                 title: `${err.status} - ${err.statusText}`,
                 msg:'Erro inesperado.',

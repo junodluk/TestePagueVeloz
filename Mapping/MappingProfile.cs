@@ -11,6 +11,8 @@ namespace PagueVeloz.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
+            CreateMap(typeof (QueryResult<>), typeof (QueryResultResource<>));
+            CreateMap<PeopleQuery, PeopleQueryResource>();
             CreateMap<People, SavePeopleResource>();
             CreateMap<People, PeopleResource>();
             CreateMap<PeoplePhone, PeoplePhoneResource>();

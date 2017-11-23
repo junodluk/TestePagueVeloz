@@ -1,4 +1,4 @@
-<h3>Pessoa</h3>
+<h3><i class="fa fa-arrow-left clickable" (click)="navigateBackToList()"></i> Pessoa</h3>
 <hr />
 <!-- <p>{{ people | json }}</p>
 <hr /> -->
@@ -28,7 +28,7 @@
   </div>
   <div class="form-group">
     <label for="birthDate">Data de Nascimento</label>
-    <div id="birthDate" class="input-group" daterangepicker [options]="options" (selected)="selectedDate($event)">
+    <div id="birthDate" class="input-group" daterangepicker [options]="datePickerOptions" (selected)="selectedDate($event)">
         <span class="form-control uneditable-input"  name="daterange" >
             {{ people.birthDate | date:'dd/M/y' }}
         </span>
@@ -38,7 +38,37 @@
     </div>
   </div>
 
-  <button class="btn btn-sm btn-success" [disabled]="!f.valid || !people.birthDate || !cpfIsValid()">Salvar</button>
-  <button *ngIf="people.id" type="button" class="btn btn-sm btn-danger" (click)="delete()">Remover</button>
-  
 </form>
+
+<h3>Telefones</h3>
+<hr />
+<div class="well" *ngIf="phoneEditForm">
+  <div class="form-group">
+    <label for="phone">Telefone</label>
+    <input id="phone" name="phone" type="text" class="form-control" [textMask]="{mask: phoneMask, guide: false}" [(ngModel)]="phoneDummy.phone" required #phone="ngModel">
+  </div>
+  <button type="button" class="btn btn-success" [disabled]="!phoneIsValid()" (click)="savePhone()"><i class="fa fa-check"></i> Salvar</button>
+  <button type="button" class="btn btn-default" (click)="resetPhone()"><i class="fa fa-close"></i> Cancelar</button>
+</div>
+<button type="button" *ngIf="!phoneEditForm" class="btn btn-primary" (click)="showPhoneEditForm()"><i class="fa fa-plus"></i> Novo Telefone</button>
+<hr />
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Telefone</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let phone of people.phones; let i = index" [attr.data-index]="i" (click)="editPhone(i, phone)">
+      <th>{{phone.phone}}</th>
+      <th class="align-right"><button type="button" class="btn btn-sm btn-danger" (click)="deletePhone(i)"><i class="fa fa-close"></i></button></th>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<button type="button" class="btn btn-success" [disabled]="!f.valid || !people.birthDate || !cpfIsValid()" (click)="submit()"><i class="fa fa-check"></i> Salvar</button>
+<button *ngIf="people.id" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-close"></i> Remover</button>
+  

@@ -63,6 +63,7 @@
   "dependencies": {
     "@types/jquery": "^3.2.16",
     "angular2-text-mask": "^8.0.4",
+    "font-awesome": "^4.7.0",
     "moment": "^2.19.2",
     "ng2-daterangepicker": "^2.0.12",
     "ng2-toasty": "^2.5.0"

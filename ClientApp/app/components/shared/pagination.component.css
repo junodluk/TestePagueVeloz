@@ -1,8 +1,4 @@
-div[daterangepicker] > span.form-control {
-    min-width: 180px;
-}
-
-table.table > thead > tr > th {
+ul.pagination > li {
     cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -11,17 +7,4 @@ table.table > thead > tr > th {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
-}
-
-table.table > tbody > tr > th {
-    cursor: pointer;
-    font-weight: normal;
-}
-
-.margin-top-10 {
-    margin-top: 10px !important;
-}
-
-.form-group {
-    margin-right: 10px;
 }

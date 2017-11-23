@@ -10,9 +10,20 @@ export class PeopleService {
 
   constructor(private http: Http) { }
 
-  getPeopleList() {
-    return this.http.get('/api/peoples')
-      .map(res => res.json() as People[]);
+  toQueryString(obj: any) {
+    var parts = [];
+    for (var property in obj) {
+      var value = obj[property];
+      if (value != null && value != undefined) 
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+    }
+    console.log(parts.join('&'));
+    return parts.join('&');
+  }
+
+  getPeopleList(filter: any) {
+    return this.http.get(`/api/peoples?${this.toQueryString(filter)}`)
+      .map(res => res.json() as { totalItems: number, items: People[]});
   }
 
   getPeople(id: number) {

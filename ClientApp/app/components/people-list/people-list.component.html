@@ -1,20 +1,68 @@
-<h3>Lista de Pessos</h3>
+<h3>Lista de Pessoas</h3>
 <hr />
-
+<p>
+  <a [routerLink]="['/peoples/new']" class="btn btn-primary"><i class="fa fa-plus"></i> Nova Pessoa</a>
+  <button type="button" class="btn btn-primary" (click)="populatePeoples()"><i class="fa fa-refresh"></i> Atualizar</button>
+</p>
+<hr />
+<div class="well">
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input id="name" name="name" type="text" class="form-control" [(ngModel)]="query.name" (change)="onFilterChange()">
+    </div>
+    <div class="form-group">
+      <label for="state">Estado</label>
+      <select id="state" name="state" class="form-control" [(ngModel)]="query.stateId" (change)="onFilterChange()">
+        <option [ngValue]="'TODOS'" [selected]="!query.stateId || query.stateId.length == 0">Todos</option>
+        <option *ngFor="let st of states" [ngValue]="st.id">{{st.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Nascimento</label>
+      <div id="birthDate" class="input-group" daterangepicker [options]="datePickerOptions" (selected)="selectBirthDate($event)">
+        <span class="form-control uneditable-input"  name="daterange" >
+          {{ birthDateStart | date:'dd/M/y' }} - {{ birthDateEnd | date:'dd/M/y' }}
+        </span>
+        <span class="input-group-btn">
+          <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="registrationDate">Registro</label>
+      <div id="registrationDate" class="input-group" daterangepicker [options]="datePickerOptions" (selected)="selectRegistrationDate($event)">
+        <span class="form-control uneditable-input"  name="daterange" >
+          {{ registrationDateStart | date:'dd/M/y' }} - {{ registrationDateEnd | date:'dd/M/y' }}
+        </span>
+        <span class="input-group-btn">
+          <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
+        </span>
+      </div>
+    </div>
+  </form>
+  <button type="button" class="btn btn-default margin-top-10" (click)="resetFilter()">Limpar</button>
+</div>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Nascimento</th>
-      <th>Estado</th>
-      <th>Registro</th>
-      <th>Modificado</th>
+      <th *ngFor="let c of columns">
+        <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+          {{ c.title }}
+          <i *ngIf="(c.key.length > 0 && query.sortBy === c.key)"
+            class="fa"
+            [class.fa-sort-asc]="query.isSortAscending"
+            [class.fa-sort-desc]="!query.isSortAscending"
+          ></i>
+        </div>
+        <div *ngIf="!c.isSortable">
+          {{ c.title }}
+        </div>
+      </th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let people of peoples">
+  <tbody *ngIf="queryResult">
+    <tr *ngFor="let people of queryResult.items" (click)="viewPeople(people)">
       <th scope="row">{{ people.id }}</th>
       <th>{{ people.name }}</th>
       <th>{{ people.cpf }}</th>
@@ -22,8 +70,9 @@
       <th>{{ people.state.id }}</th>
       <th>{{ people.registrationDate | date: 'dd/MM/yyyy'  }}</th>
       <th>{{ people.lastUpdate | date: 'dd/MM/yyyy'  }}</th>
-      <th> <a href=""></a> </th>
     </tr>
   </tbody>
 </table>
+<pagination [total-items]="queryResult.totalItems" [current-page]="query.page" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
+
 
